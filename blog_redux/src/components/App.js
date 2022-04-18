@@ -10,10 +10,12 @@ const App = () => {
   return (
     <BrowserRouter>
       <Menu />
-      <Routes>
-        <Route exact path="/" element={<Users />} />
-        <Route exact path="/tasks" element={<Tasks />} />
-      </Routes>
+      <div className="margen">
+        <Routes>
+          <Route exact path="/" element={<Users />} />
+          <Route exact path="/tasks" element={<Tasks />} />
+        </Routes>
+      </div>
     </BrowserRouter>
   );
 };

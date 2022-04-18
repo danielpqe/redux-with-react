@@ -1,24 +1,23 @@
 import React, { Component } from "react";
-import axios from "axios";
+// import axios from "axios";
+import { connect } from "react-redux";
+
+import * as usersActions from "../../actions/usersActions";
 
 class Users extends Component {
-  constructor(props) {
-    super();
-    this.state = {
-      usuarios: [],
-    };
+  // constructor(props) {
+  //   super();
+  //   this.state = {
+  //     usuarios: [],
+  //   };
+  // }
+
+  componentDidMount() {
+    //this.props.getAll();
   }
 
-  async componentDidMount() {
-    const { data } = await axios.get(
-      "https://jsonplaceholder.typicode.com/users"
-    );
-    this.setState({
-      usuarios: data,
-    });
-  }
   ponerFilas = () =>
-    this.state.usuarios.map((user) => (
+    this.props.users.map((user) => (
       <tr key={user.id}>
         <td>{user.name}</td>
         <td>{user.email}</td>
@@ -27,8 +26,9 @@ class Users extends Component {
     ));
 
   render() {
+    console.log(this.props);
     return (
-      <div className="margen">
+      <div>
         <table className="tabla">
           <thead>
             <tr key="">
@@ -44,4 +44,8 @@ class Users extends Component {
   }
 }
 
-export default Users;
+const mapStateToProps = (reducers) => {
+  return reducers.usersReducer;
+};
+
+export default connect(mapStateToProps, { usersActions })(Users);
